@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react'
+import Header from './Header'
+import Attendances from './Attendances';
+import AddAttendance from './AddAttendance';
 function App() {
+  const records = [
+    {
+    id:1,
+    name: "Philip",
+    matricule: "CT111",
+    present: false,
+  },
+    {
+    id:2,
+    name: "Ndula",
+    matricule: "CT112",
+    present: false,
+  },
+    {
+    id:3,
+    name: "Ndoye",
+    matricule: "CT113",
+    present: false,
+  },
+]
+const [attendances, setAttendances] = useState(records)
+const deleteRecord = (id) =>{
+  console.log("deleting")
+  setAttendances(attendances.filter((record) => record.id !== id))
+
+}
+const toggleRecord = (id) =>{
+
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header title="Course Attendance Record"  />
+      <AddAttendance />
+      <Attendances attendances={attendances} deleteRecord={deleteRecord}/>
+    </>
   );
 }
 
